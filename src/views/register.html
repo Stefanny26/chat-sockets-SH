@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrate</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/register.css">
+  <meta charset="UTF-8" />
+  <title>Login - Web Chat</title>
+  <link rel="stylesheet" href="css/register.css" />
 </head>
 <body>
-    <header>
-        <h1>Web Chat</h1>
-    </header>
+  <div class="login-container">
+    <h2>Bienvenido al Chat</h2>
+    <input type="text" id="username" placeholder="Ingresa tu nombre de usuario" />
+    <button id="login">Ingresar</button>
+  </div>
 
-    <main>
-        <form action="#" method="post" class="card">
-            <div class="input-group">
-                <label for="username">Ingresa tu nombre de usuario</label>
-                <input type="text" id="username">
-            </div>
-            <div class="button-container">
-                <button type="button" class="btn primary" id="login">Ingresar al chat</button>
-            </div>
-        </form>
-    </main>
-<script src="js/register.js"></script>
+  <script>
+    const login = document.querySelector("#login");
+    login.addEventListener("click", () => {
+      const user = document.querySelector("#username").value.trim();
+      if (user !== "") {
+        document.cookie = `username=${user}; path=/`;
+        document.location.href = "/";
+      } else {
+        alert("Por favor ingresa tu nombre de usuario");
+      }
+    });
+  </script>
 </body>
 </html>
