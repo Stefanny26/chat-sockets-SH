@@ -69,10 +69,12 @@ http://localhost:3000/register.html
 5. Ingresar un nombre de usuario y comenzar a chatear en tiempo real.
 
 ## Capturas de Pantalla
-### Pagina de Regsitro
+Pagina de Registro
+
 ![Pantalla de Registro](capturas/registro.png)
 
-### Chat en funcionamiento
+Chat en funcionamiento
+
 ![Chat en funcionamiento](capturas/chat-funcionando.png)
 
 ## Conclusiones
