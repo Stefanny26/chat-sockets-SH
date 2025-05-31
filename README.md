@@ -78,7 +78,7 @@ http://localhost:3000/register.html
 Este proyecto permitió entender cómo funcionan los sockets para aplicaciones en tiempo real, así como la gestión de usuarios con cookies y la comunicación bidireccional entre cliente y servidor. Además, mejorar el diseño y agregar funcionalidades básicas como cerrar sesión ayuda a crear una experiencia más completa y profesional.
 
 ## Referencias
-Documentación oficial de Socket.IO
-Tutoriales de diseño de chat con HTML y CSS (W3Schools, MDN)
-Repositorio base del docente: https://github.com/paulosk8/webChat
-Foros y artículos sobre manejo de cookies en JavaScript
+1. Documentación oficial de Socket.IO
+2. Tutoriales de diseño de chat con HTML y CSS (W3Schools, MDN)
+3. Repositorio base del docente: https://github.com/paulosk8/webChat
+3. Foros y artículos sobre manejo de cookies en JavaScript
