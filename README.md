@@ -78,18 +78,26 @@ Puedes ver los commits, avances y pruebas en esta rama específica.
 
 ## 📸 Capturas de Pantalla
 ### Vista general del chat con lista de usuarios conectados
+Vista del chat con lista de usuarios conectados:
 
+![Chat con usuarios conectados](assets/elementos.png)
+
+Versión móvil:
+
+![Versión móvil](assets/pantalla2.png)
 ### Mensajes diferenciados por usuario
 
 Asegúrate de agregar estas imágenes en tu carpeta /assets/screenshots/.
 
 ## Pruebas Recomendadas
 Abrir múltiples pestañas y comprobar sincronización de mensajes.
+![Chat con usuarios conectados](assets/PruebasFuncionales.png)
 
 Verificar que la lista de usuarios se actualiza correctamente al conectarse o desconectarse.
+![Chat con usuarios conectados](assets/elementos.png)
 
 Probar en distintos dispositivos o navegadores.
-
+![Versión móvil](assets/pantalla2.png)
 
 ## 🎯 Conclusión
 Este proyecto demuestra la capacidad de implementar funcionalidades en tiempo real utilizando WebSockets y personalizar una interfaz de usuario moderna. La lista de usuarios conectados añade valor y refleja la comprensión del flujo de datos en aplicaciones colaborativas.
