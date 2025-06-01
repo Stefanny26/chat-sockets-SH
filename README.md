@@ -1,87 +1,99 @@
-# Chat en Tiempo Real con Sockets
+# 💬 Chat en Tiempo Real con Socket.IO – Lista de Usuarios Conectados
 
 ## Nombre del estudiante
 Stefanny Hernandez
 
 ## Fecha de entrega
-30 de mayo de 2025
+1 de junio de 2025
 
 ---
 
-## 📌 Introducción
-Este proyecto es un chat en tiempo real desarrollado con Node.js y Socket.IO. Permite que múltiples usuarios se comuniquen simultáneamente en una interfaz sencilla y funcional. Los usuarios deben ingresar un nombre antes de empezar a chatear, y pueden enviar mensajes que se transmiten a todos los participantes conectados.
+## 🧠 Introducción
 
-El uso de sockets es fundamental para aplicaciones en tiempo real, ya que permiten una comunicación bidireccional instantánea entre cliente y servidor, lo que resulta ideal para chats, juegos multijugador, notificaciones y más.
+Este proyecto es una mejora del chat en tiempo real desarrollado en la Tarea 2. El objetivo principal fue **agregar una sección que muestre la lista de usuarios conectados**, similar a las interfaces utilizadas en aplicaciones populares como **WhatsApp** o **Telegram**. 
 
-## 📁 Repositorio Base
+La implementación utiliza **Socket.IO** para gestionar y sincronizar en tiempo real tanto los mensajes como la presencia de usuarios conectados, mejorando la experiencia colaborativa del sistema.
 
-El proyecto fue desarrollado a partir del repositorio base proporcionado por el docente:
-https://github.com/paulosk8/webChat/tree/main
+---
 
-Se trabajó en la rama mi-implementacion.
+## 🚀 Características Principales
 
-## Implementación del Proyecto
-### Estructura del código
-**index.html:** Página principal del chat, que muestra mensajes, entrada de texto y botón para enviar mensajes. También muestra el nombre del usuario y opción para cerrar sesión.
+- Comunicación en tiempo real entre múltiples usuarios (mensajes instantáneos).
+- Interfaz moderna y responsiva, inspirada en WhatsApp Web.
+- Avatares y diseño de burbujas estilo chat.
+- Sección lateral con **lista de usuarios conectados en tiempo real**.
+- Indicador visual de mensajes propios y de otros usuarios.
+- Sincronización entre múltiples pestañas y dispositivos.
 
-**register.html:** Página para ingresar el nombre de usuario antes de acceder al chat.
+---
 
-**js/script.js:** Código cliente que gestiona la conexión Socket.IO, envío y recepción de mensajes, lectura de la cookie de usuario, y cierre de sesión.
+## 🛠️ Tecnologías Utilizadas
 
-**js/register.js:** Script para validar el nombre de usuario y almacenarlo en cookie.
+- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: Node.js, Express
+- **WebSockets**: Socket.IO
+- **Estilo**: CSS personalizado estilo WhatsApp
 
-**realTimeServer.js:** Servidor Socket.IO que maneja las conexiones, asigna nombres a sockets, y emite mensajes a todos los usuarios conectados.
+---
 
-### Mejoras en el diseño
-Interfaz sencilla y clara.
-![Interfaz sencilla y clara](capturas/Interfaz.png)
+## 📂 Estructura del Repositorio
 
-Uso de cookies para guardar el nombre del usuario.
-![Uso de cookies](capturas/cokies.png)
+📁 public/
+  ├─ index.html          # Página principal del chat
+  ├─ style.css           # Estilos generales
+  ├─ chat.css            # Estilos del componente de mensajes y lista de usuarios
+📁 src/
+  ├─ server.js           # Servidor con Socket.IO
+📁 assets/
+  ├─ screenshots/        # Capturas de pantalla del chat funcionando
+.gitignore
+README.md
+package.json
 
-Mensajes con hora de envío y diferenciación visual entre mensajes propios y ajenos.
-![Mensajes en el chat](capturas/mensajes.png)
+---
 
-Botón de cerrar sesión para borrar cookie y recargar página.
-![Botón cerrar sesión](capturas/Cierre.png)
+## 🌐 Cómo Ejecutar el Proyecto
+1. Clona el repositorio:
+- git clone https://github.com/tuusuario/tu-repo-chat.git
+- cd tu-repo-chat
 
-### Características adicionales implementadas
-**Nombre de usuario:** Solicita ingresar un nombre antes de acceder al chat.
+2. Instala las dependencias:
+- npm install
 
-**Mostrar usuario en mensajes:** Cada mensaje muestra el nombre del remitente.
+3. Ejecuta el servidor:
+- node src/server.js
 
-**Cerrar sesión:** Permite al usuario salir borrando su cookie.
+4. Abre tu navegador y accede a:
 
-## Instrucciones de Ejecución
-1. Clonar el repositorio:
-git clone https://github.com/Stefanny26/chat-sockets-SH.git
-cd chat-sockets-SH
+- http://localhost:3000
 
-2. Instalar dependencias (asumiendo Node.js y npm instalados):
-npm install
+5. Abre en varias pestañas o dispositivos para probar la lista de usuarios conectados en tiempo real.
 
-3. jecutar el servidor:
-node realTimeServer.js
+## 🔀 Rama de Desarrollo
+Este proyecto utiliza una rama de desarrollo específica para esta funcionalidad:
 
-4. Abrir el navegador y acceder a:
-http://localhost:3000/register.html
+- **Rama:** feature-usuarios-conectados
 
-5. Ingresar un nombre de usuario y comenzar a chatear en tiempo real.
+Puedes ver los commits, avances y pruebas en esta rama específica.
 
-## Capturas de Pantalla
-### Pagina de Registro
+## 📸 Capturas de Pantalla
+### Vista general del chat con lista de usuarios conectados
 
-![Pantalla de Registro](capturas/registro.png)
+### Mensajes diferenciados por usuario
 
-### Chat en funcionamiento
+Asegúrate de agregar estas imágenes en tu carpeta /assets/screenshots/.
 
-![Chat en funcionamiento](capturas/chat-funcionando.png)
+## Pruebas Recomendadas
+Abrir múltiples pestañas y comprobar sincronización de mensajes.
 
-## Conclusiones
-Este proyecto permitió entender cómo funcionan los sockets para aplicaciones en tiempo real, así como la gestión de usuarios con cookies y la comunicación bidireccional entre cliente y servidor. Además, mejorar el diseño y agregar funcionalidades básicas como cerrar sesión ayuda a crear una experiencia más completa y profesional.
+Verificar que la lista de usuarios se actualiza correctamente al conectarse o desconectarse.
 
-## Referencias
-1. Documentación oficial de Socket.IO
-2. Tutoriales de diseño de chat con HTML y CSS (W3Schools, MDN)
-3. Repositorio base del docente: https://github.com/paulosk8/webChat
-3. Foros y artículos sobre manejo de cookies en JavaScript
+Probar en distintos dispositivos o navegadores.
+
+
+## 🎯 Conclusión
+Este proyecto demuestra la capacidad de implementar funcionalidades en tiempo real utilizando WebSockets y personalizar una interfaz de usuario moderna. La lista de usuarios conectados añade valor y refleja la comprensión del flujo de datos en aplicaciones colaborativas.
+
+## 👨‍💻 Autor
+**Nombre:** Stefanny Hernandez
+**GitHub:** @Stefanny26

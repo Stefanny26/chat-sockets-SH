@@ -1,23 +1,27 @@
-module.exports = function (server) {
-  const { Server } = require("socket.io");
-  const io = new Server(server);
+const { Server } = require("socket.io");
 
-  const users = {};
+module.exports = (server) => {
+  const io = new Server(server);
+  const users = new Map(); // socket.id -> username
 
   io.on("connection", (socket) => {
-    console.log("Usuario conectado:", socket.id);
-
     socket.on("setUsername", (username) => {
-      users[socket.id] = username;
+      users.set(socket.id, username);
+      io.emit("users", Array.from(users.values())); // Enviar lista actualizada
     });
 
-    socket.on("message", ({ message }) => {
-      const user = users[socket.id] || "Anónimo";
-      io.emit("message", { user, message, senderId: socket.id });
+    socket.on("message", (data) => {
+      const username = users.get(socket.id) || "Anónimo";
+      io.emit("message", {
+        user: username,
+        message: data.message,
+        senderId: socket.id
+      });
     });
 
     socket.on("disconnect", () => {
-      delete users[socket.id];
+      users.delete(socket.id);
+      io.emit("users", Array.from(users.values())); // Actualizar lista
     });
   });
 };
