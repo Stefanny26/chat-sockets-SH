@@ -14,6 +14,8 @@
 
 El manejo de excepciones es una práctica crítica en el desarrollo backend, especialmente en entornos de ejecución asincrónica como Node.js. Permite capturar y gestionar errores sin que la aplicación falle abruptamente, ofreciendo respuestas claras al usuario y facilitando el mantenimiento del código. En este informe se analizarán las estrategias más efectivas para controlar errores en Node.js, aplicadas a un proyecto real: un chat en tiempo real desarrollado con Socket.IO.
 
+---
+
 ##  Tecnologías Utilizadas
 
 - Node.js
@@ -36,6 +38,8 @@ El manejo de excepciones es una práctica crítica en el desarrollo backend, esp
 - Respuestas HTTP estándar (`401`, `500`)
 - Emisión de errores personalizados vía Socket.IO
 
+---
+
 ###  Tipos de Errores en Node.js
 
 1. **Errores de sintaxis (`SyntaxError`)**
@@ -52,7 +56,7 @@ El manejo de excepciones es una práctica crítica en el desarrollo backend, esp
 4. **Errores personalizados (`CustomError`)**
    Errores definidos por el desarrollador para validar lógicas de negocio específicas, útiles en autenticación o validación de datos.
 
-
+---
 
 ###  Buenas Prácticas para el Manejo de Excepciones
 
@@ -71,11 +75,7 @@ El manejo de excepciones es una práctica crítica en el desarrollo backend, esp
 * **Respuestas HTTP claras**
   El middleware responde con códigos como `401` (no autenticado) o `500` (error interno), mejorando la comunicación con el cliente.
 
-
-
-Aquí tienes tu sección actualizada con la **nueva validación de nombre de usuario en el frontend**, integrada de manera uniforme con el resto del informe y los ejemplos de manejo de excepciones que ya tenías:
-
-
+---
 
 ## 🛠️ Manejo de Excepciones Implementado en el Chat con Socket.IO
 
@@ -182,7 +182,7 @@ login.addEventListener("click", () => {
 
 > Evita registros inválidos y asegura que el usuario sea válido antes de guardar la cookie.
 
-
+---
 
 ##  Reutilización del Código y Buenas Prácticas
 
@@ -195,6 +195,7 @@ login.addEventListener("click", () => {
   * Mejor experiencia para el usuario ante fallos.
   * Preparación para escalar a proyectos más grandes.
 
+---
 
 ##  Middleware Centralizado de Errores (Express)
 
@@ -207,14 +208,17 @@ app.use((err, req, res, next) => {
 
 > Permite una gestión unificada de errores en toda la aplicación, mejora la depuración y previene respuestas inconsistentes.
 
+---
 
 ### Conclusiones
 
-El manejo de excepciones no solo mejora la calidad del software, sino que es fundamental para brindar confianza al usuario y facilitar el desarrollo colaborativo. A través de este ejercicio se fortalecieron conceptos clave como validación, separación de responsabilidades y reutilización de código.
-El principal desafío fue identificar todos los puntos posibles de fallo, pero su resolución permitió lograr un sistema más robusto.
+A lo largo de esta tarea, pude comprender y aplicar de manera práctica la importancia del manejo adecuado de excepciones en aplicaciones desarrolladas con Node.js. Iniciar con un proyecto existente como el chat en tiempo real me permitió ver con claridad dónde pueden surgir errores comunes, tanto en el backend (como rutas Express, eventos de Socket.IO, y middlewares), como en el frontend (validación de usuarios, envío de mensajes, etc.).
 
+Implementar bloques try-catch, validar correctamente los datos que entran y salen, y centralizar los errores en un middleware global no solo fortaleció la estructura del proyecto, sino que también mejoró significativamente la experiencia del usuario. Ahora, si algo sale mal, la aplicación no se rompe silenciosamente: da retroalimentación clara y controlada.
 
+Además, entendí que manejar errores no es solo para "evitar que se caiga todo", sino una práctica esencial para construir software robusto, escalable y mantenible. También me enfrenté a algunos desafíos técnicos, especialmente al identificar los puntos críticos del código y entender cómo comunicar los errores correctamente al cliente, pero al resolverlos, reforcé mis habilidades de depuración y análisis.
 
+---
 
 ### 📚 Referencias
 
