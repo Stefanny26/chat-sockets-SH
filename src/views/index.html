@@ -23,5 +23,27 @@
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="js/script.js"></script>
+  <script>
+  // Mostrar el nombre de usuario
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+  const username = getCookie('username');
+  document.getElementById('nombre-usuario').textContent = username || 'Anónimo';
+
+  // Cerrar sesión
+  document.getElementById('logout').addEventListener('click', () => {
+    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.href = "/register";
+  });
+
+  // Manejo de errores de Socket.IO
+  const socket = io();
+  socket.on("error", (msg) => {
+    alert("Error: " + msg);
+  });
+</script>
 </body>
 </html>

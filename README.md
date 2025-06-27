@@ -1,87 +1,226 @@
-# Chat en Tiempo Real con Sockets
 
-## Nombre del estudiante
-Stefanny Hernandez
+## 📄 **Informe Técnico: Manejo de Excepciones en Node.js con Aplicación de Chat Socket.IO**
 
-## Fecha de entrega
-30 de mayo de 2025
+**Nombre:** Stefanny Mishel Hernández Buenaño
+
+**Carrera / Curso:** Ingeniería en Tecnologías de la Información
+
+**Fecha de Entrega:** 26 de junio de 2025
+
+
+
+
+###  Introducción
+
+El manejo de excepciones es una práctica crítica en el desarrollo backend, especialmente en entornos de ejecución asincrónica como Node.js. Permite capturar y gestionar errores sin que la aplicación falle abruptamente, ofreciendo respuestas claras al usuario y facilitando el mantenimiento del código. En este informe se analizarán las estrategias más efectivas para controlar errores en Node.js, aplicadas a un proyecto real: un chat en tiempo real desarrollado con Socket.IO.
+
+##  Tecnologías Utilizadas
+
+- Node.js
+- Express
+- Socket.IO
+- JavaScript (Frontend)
+- HTML + CSS
+- Cookies para sesión simple
 
 ---
 
-## 📌 Introducción
-Este proyecto es un chat en tiempo real desarrollado con Node.js y Socket.IO. Permite que múltiples usuarios se comuniquen simultáneamente en una interfaz sencilla y funcional. Los usuarios deben ingresar un nombre antes de empezar a chatear, y pueden enviar mensajes que se transmiten a todos los participantes conectados.
+##  Características Implementadas
 
-El uso de sockets es fundamental para aplicaciones en tiempo real, ya que permiten una comunicación bidireccional instantánea entre cliente y servidor, lo que resulta ideal para chats, juegos multijugador, notificaciones y más.
+- Chat en tiempo real por sockets
+- Registro básico de usuario con cookie
+- Validación de inputs del lado cliente
+- Middleware de autenticación
+- Middleware global de manejo de errores
+- Logging de errores en consola
+- Respuestas HTTP estándar (`401`, `500`)
+- Emisión de errores personalizados vía Socket.IO
 
-## 📁 Repositorio Base
+###  Tipos de Errores en Node.js
 
-El proyecto fue desarrollado a partir del repositorio base proporcionado por el docente:
-https://github.com/paulosk8/webChat/tree/main
+1. **Errores de sintaxis (`SyntaxError`)**
+   Ocurren al escribir código inválido: por ejemplo, paréntesis sin cerrar o uso incorrecto de palabras clave.
 
-Se trabajó en la rama mi-implementacion.
+2. **Errores en tiempo de ejecución (`TypeError`, `ReferenceError`)**
 
-## Implementación del Proyecto
-### Estructura del código
-**index.html:** Página principal del chat, que muestra mensajes, entrada de texto y botón para enviar mensajes. También muestra el nombre del usuario y opción para cerrar sesión.
+   * `TypeError`: Llamar a una función sobre algo que no lo es (`undefined()`).
+   * `ReferenceError`: Acceder a una variable no definida.
 
-**register.html:** Página para ingresar el nombre de usuario antes de acceder al chat.
+3. **Errores del sistema (`SystemError`)**
+   Derivan de fallos a nivel de sistema operativo, como problemas con la red o archivos.
 
-**js/script.js:** Código cliente que gestiona la conexión Socket.IO, envío y recepción de mensajes, lectura de la cookie de usuario, y cierre de sesión.
+4. **Errores personalizados (`CustomError`)**
+   Errores definidos por el desarrollador para validar lógicas de negocio específicas, útiles en autenticación o validación de datos.
 
-**js/register.js:** Script para validar el nombre de usuario y almacenarlo en cookie.
 
-**realTimeServer.js:** Servidor Socket.IO que maneja las conexiones, asigna nombres a sockets, y emite mensajes a todos los usuarios conectados.
 
-### Mejoras en el diseño
-Interfaz sencilla y clara.
-![Interfaz sencilla y clara](capturas/Interfaz.png)
+###  Buenas Prácticas para el Manejo de Excepciones
 
-Uso de cookies para guardar el nombre del usuario.
-![Uso de cookies](capturas/cokies.png)
+* **Bloques `try-catch`**
+  Se usaron en rutas Express y lógica de conexión de sockets para capturar errores sin interrumpir el flujo.
 
-Mensajes con hora de envío y diferenciación visual entre mensajes propios y ajenos.
-![Mensajes en el chat](capturas/mensajes.png)
+* **Errores asincrónicos (`async/await`, `Promise.catch`)**
+  Aunque el proyecto es sincrónico, en una ampliación futura los controladores podrían usar funciones `async` para manejo robusto de base de datos o APIs externas.
 
-Botón de cerrar sesión para borrar cookie y recargar página.
-![Botón cerrar sesión](capturas/Cierre.png)
+* **Middleware de errores**
+  Se añadió un middleware global en Express para interceptar y responder adecuadamente a errores no manejados.
 
-### Características adicionales implementadas
-**Nombre de usuario:** Solicita ingresar un nombre antes de acceder al chat.
+* **Logging de errores**
+  Se utilizó `console.error`, y se dejó preparado para integrarse con herramientas como `winston`.
 
-**Mostrar usuario en mensajes:** Cada mensaje muestra el nombre del remitente.
+* **Respuestas HTTP claras**
+  El middleware responde con códigos como `401` (no autenticado) o `500` (error interno), mejorando la comunicación con el cliente.
 
-**Cerrar sesión:** Permite al usuario salir borrando su cookie.
 
-## Instrucciones de Ejecución
-1. Clonar el repositorio:
-git clone https://github.com/Stefanny26/chat-sockets-SH.git
-cd chat-sockets-SH
 
-2. Instalar dependencias (asumiendo Node.js y npm instalados):
-npm install
+Aquí tienes tu sección actualizada con la **nueva validación de nombre de usuario en el frontend**, integrada de manera uniforme con el resto del informe y los ejemplos de manejo de excepciones que ya tenías:
 
-3. jecutar el servidor:
-node realTimeServer.js
 
-4. Abrir el navegador y acceder a:
-http://localhost:3000/register.html
 
-5. Ingresar un nombre de usuario y comenzar a chatear en tiempo real.
+## 🛠️ Manejo de Excepciones Implementado en el Chat con Socket.IO
 
-## Capturas de Pantalla
-### Pagina de Registro
+En el desarrollo del sistema de chat en tiempo real, se aplicaron diversas estrategias de **manejo de excepciones** para garantizar robustez, claridad ante fallos, y una mejor experiencia de usuario. A continuación se detallan los principales puntos implementados:
 
-![Pantalla de Registro](capturas/registro.png)
 
-### Chat en funcionamiento
+### 🧪 Ejemplo 1: Conexión de Sockets (`realTimeServer.js`)
 
-![Chat en funcionamiento](capturas/chat-funcionando.png)
+```js
+io.on("connection", (socket) => {
+  try {
+    const cookie = socket.handshake.headers.cookie;
+    if (!cookie) throw new Error("No se encontró cookie de usuario");
+    const user = cookie.split("=").pop();
 
-## Conclusiones
-Este proyecto permitió entender cómo funcionan los sockets para aplicaciones en tiempo real, así como la gestión de usuarios con cookies y la comunicación bidireccional entre cliente y servidor. Además, mejorar el diseño y agregar funcionalidades básicas como cerrar sesión ayuda a crear una experiencia más completa y profesional.
+    socket.on("message", ({ message }) => {
+      if (!message || typeof message !== "string") {
+        socket.emit("error", "Mensaje inválido");
+        return;
+      }
+      io.emit("message", { user, message, senderId: socket.id });
+    });
+  } catch (err) {
+    console.error("Error en conexión de socket:", err.message);
+    socket.emit("error", "Error interno en la conexión");
+  }
+});
+```
+![Prueba de manejo de errores](capturas/Prueba5.png)
 
-## Referencias
-1. Documentación oficial de Socket.IO
-2. Tutoriales de diseño de chat con HTML y CSS (W3Schools, MDN)
-3. Repositorio base del docente: https://github.com/paulosk8/webChat
-3. Foros y artículos sobre manejo de cookies en JavaScript
+> Se implementó validación de existencia de `cookie`, estructura de mensaje y uso de `try-catch`.
+
+
+
+### 🧪 Ejemplo 2: Rutas Express con Validación (`routes/index.js`)
+
+```js
+router.get("/", isLoggedIn, (req, res, next) => {
+  try {
+    res.sendFile(views + "/index.html");
+  } catch (err) {
+    next(err); // Se delega el error al middleware global
+  }
+});
+```
+
+![Eliminacion de Cookies](capturas/Prueba2.png)
+
+![Recargo de pagina luego de eliminar Cookies](capturas/Prueba22.png)
+
+> Las rutas están encapsuladas con `try-catch` para capturar errores al renderizar vistas.
+
+
+
+### 🧪 Ejemplo 3: Middleware Global de Errores (Express)
+
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({ error: err.message || "Error interno" });
+});
+```
+
+![Prueba de manejo de errores](capturas/Prueba3.png)
+
+> Este middleware garantiza respuestas HTTP consistentes y centraliza la lógica de errores.
+
+
+
+### 🧪 Ejemplo 4: Manejo de Errores desde el Servidor en el Cliente (`script.js`)
+
+```js
+socket.on("error", (msg) => {
+  alert("Error: " + msg);
+});
+```
+
+> Permite mostrar retroalimentación inmediata al usuario cuando ocurre un error del lado del servidor.
+
+
+
+### 🧪 Ejemplo 5: Validación de Usuario en Registro (`register.js`)
+
+```js
+const login = document.querySelector("#login");
+
+login.addEventListener("click", () => {
+  try {
+    const user = document.querySelector("#username").value.trim();
+    if (user && /^[a-zA-Z0-9_]+$/.test(user)) {
+      document.cookie = `username=${user}; path=/`;
+      document.location.href = "/";
+    } else {
+      alert("Por favor ingresa un nombre de usuario válido (solo letras, números y guiones bajos)");
+    }
+  } catch (err) {
+    alert("Ocurrió un error inesperado al registrar el usuario.");
+    console.error("Error en registro:", err);
+  }
+});
+```
+
+![Prueba de manejo de errores](capturas/Prueba4.png)
+
+> Evita registros inválidos y asegura que el usuario sea válido antes de guardar la cookie.
+
+
+
+##  Reutilización del Código y Buenas Prácticas
+
+*  **Puntos Críticos Identificados**: `realTimeServer.js`, rutas protegidas, autenticación (`isLoggedIn.js`) y lógica de registro.
+*  **Refactorización Responsable**: Se mantuvo la lógica original, encapsulando procesos críticos en `try-catch` y validando entradas.
+*  **Ventajas Obtenidas**:
+
+  * Mayor control sobre errores inesperados.
+  * Código más limpio y mantenible.
+  * Mejor experiencia para el usuario ante fallos.
+  * Preparación para escalar a proyectos más grandes.
+
+
+##  Middleware Centralizado de Errores (Express)
+
+```js
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({ error: err.message || "Error interno del servidor" });
+});
+```
+
+> Permite una gestión unificada de errores en toda la aplicación, mejora la depuración y previene respuestas inconsistentes.
+
+
+### Conclusiones
+
+El manejo de excepciones no solo mejora la calidad del software, sino que es fundamental para brindar confianza al usuario y facilitar el desarrollo colaborativo. A través de este ejercicio se fortalecieron conceptos clave como validación, separación de responsabilidades y reutilización de código.
+El principal desafío fue identificar todos los puntos posibles de fallo, pero su resolución permitió lograr un sistema más robusto.
+
+
+
+
+### 📚 Referencias
+
+* [Node.js Docs – Errors](https://nodejs.org/api/errors.html)
+* [Express Docs – Error Handling](https://expressjs.com/en/guide/error-handling.html)
+* [Socket.IO Docs](https://socket.io/docs/v4/)
+* [Winston Logging Library](https://github.com/winstonjs/winston)
+
+---

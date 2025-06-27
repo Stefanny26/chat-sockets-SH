@@ -10,8 +10,10 @@ function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
-const username = getCookie("username") || "Anónimo";
-document.querySelector("#nombre-usuario").textContent = username;
+const username = getCookie("username"); // No usar Anónimo por defecto
+document.querySelector("#nombre-usuario").textContent = username || "No autenticado";
+
+// Emitir nombre al servidor (aunque sea inválido para probar)
 socket.emit("setUsername", username);
 
 // Cerrar sesión
@@ -20,10 +22,10 @@ document.querySelector("#logout").addEventListener("click", () => {
   location.reload();
 });
 
-// Enviar mensaje
+// Enviar mensaje (ya no se filtra en frontend para que el backend lo valide)
 send.addEventListener("click", () => {
   const text = messageInput.value.trim();
-  if (!text) return;
+  // NO retornar en frontend, se envía al backend para que lo valide
   socket.emit("message", { message: text });
   messageInput.value = "";
 });
@@ -50,4 +52,9 @@ socket.on("message", ({ user, message, senderId }) => {
 
   allMessages.append(msg);
   allMessages.scrollTop = allMessages.scrollHeight;
+});
+
+// Mostrar errores emitidos por el servidor
+socket.on("error", (msg) => {
+  alert("Error: " + msg);
 });

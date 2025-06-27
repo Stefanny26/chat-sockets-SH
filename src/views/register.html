@@ -15,12 +15,18 @@
   <script>
     const login = document.querySelector("#login");
     login.addEventListener("click", () => {
-      const user = document.querySelector("#username").value.trim();
-      if (user !== "") {
-        document.cookie = `username=${user}; path=/`;
-        document.location.href = "/";
-      } else {
-        alert("Por favor ingresa tu nombre de usuario");
+      try {
+        const user = document.querySelector("#username").value.trim();
+        // Validación: no vacío y solo letras, números y guiones bajos
+        if (user && /^[a-zA-Z0-9_]+$/.test(user)) {
+          document.cookie = `username=${user}; path=/`;
+          document.location.href = "/";
+        } else {
+          alert("Por favor ingresa un nombre de usuario válido (solo letras, números y guiones bajos)");
+        }
+      } catch (err) {
+        alert("Ocurrió un error inesperado al registrar el usuario.");
+        console.error("Error en registro:", err);
       }
     });
   </script>
